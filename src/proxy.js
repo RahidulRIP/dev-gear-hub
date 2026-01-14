@@ -1,18 +1,14 @@
 import { NextResponse } from "next/server";
+import React from "react";
 
 const proxy = (request) => {
-  const { pathname,origin } = request.nextUrl;
+  const { pathname } = request.nextUrl;
 
   const isLoggedIn = request.cookies.get("isLoggedIn")?.value == "true";
 
   if (pathname.startsWith("/add-item")) {
     if (!isLoggedIn) {
-      //   return NextResponse.redirect(new URL("/login", request.url));
-
-      // const loginUrl = new URL("/login", request.url);
-      const loginUrl = new URL("/login", origin);
-      loginUrl.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(loginUrl);
+      return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 

@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,16 +23,12 @@ const LoginPage = () => {
       formData.password === "admin123"
     ) {
       // Set Client-side Cookie
-      // document.cookie = "isLoggedIn=true; path=/; max-age=3600";
-      document.cookie = `isLoggedIn=true; path=/; max-age=3600; SameSite=Lax; ${
-        window.location.protocol === "https:" ? "Secure" : ""
-      }`;
+      document.cookie = "isLoggedIn=true; path=/; max-age=3600";
 
       toast.success("Login Successful!");
 
-      const destination = searchParams.get("redirect") || "/";
-      // Redirect to protected route from login
-      router.push(destination);
+      // Redirect to protected route
+      router.push("/");
       router.refresh();
     } else {
       setError(

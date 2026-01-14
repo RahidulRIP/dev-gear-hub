@@ -28,7 +28,7 @@ const Navbar = () => {
     document.cookie = "isLoggedIn=; path=/; max-age=0";
     setIsLoggedIn(false);
     closeMenu();
-    router.push("/login");
+    router.push("/");
     router.refresh();
   };
 
