@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import React from "react";
 
 const proxy = (request) => {
   const { pathname } = request.nextUrl;

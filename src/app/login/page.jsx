@@ -1,11 +1,17 @@
 import LoginPage from "@/components/Pages/LoginPage";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Login = () => {
   return (
-    <div>
-      <LoginPage /> 
-    </div>
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <LoginPage />
+    </Suspense>
   );
 };
 
