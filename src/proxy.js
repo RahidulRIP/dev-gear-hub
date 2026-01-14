@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 const proxy = (request) => {
-  const { pathname } = request.nextUrl;
+  const { pathname,origin } = request.nextUrl;
 
   const isLoggedIn = request.cookies.get("isLoggedIn")?.value == "true";
 
