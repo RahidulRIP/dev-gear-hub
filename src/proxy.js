@@ -9,7 +9,8 @@ const proxy = (request) => {
     if (!isLoggedIn) {
       //   return NextResponse.redirect(new URL("/login", request.url));
 
-      const loginUrl = new URL("/login", request.url);
+      // const loginUrl = new URL("/login", request.url);
+      const loginUrl = new URL("/login", origin);
       loginUrl.searchParams.set("redirect", pathname);
       return NextResponse.redirect(loginUrl);
     }

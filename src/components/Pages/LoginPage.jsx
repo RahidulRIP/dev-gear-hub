@@ -24,7 +24,10 @@ const LoginPage = () => {
       formData.password === "admin123"
     ) {
       // Set Client-side Cookie
-      document.cookie = "isLoggedIn=true; path=/; max-age=3600";
+      // document.cookie = "isLoggedIn=true; path=/; max-age=3600";
+      document.cookie = `isLoggedIn=true; path=/; max-age=3600; SameSite=Lax; ${
+        window.location.protocol === "https:" ? "Secure" : ""
+      }`;
 
       toast.success("Login Successful!");
 
