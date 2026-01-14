@@ -79,12 +79,14 @@ const Navbar = () => {
               </Link>
             )}
 
-            <Link
-              href="/login"
-              className="px-5 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 shadow-md shadow-blue-200 transition-all"
-            >
-              Get Started
-            </Link>
+            {!isLoggedIn && (
+              <Link
+                href="/login"
+                className="px-5 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 shadow-md shadow-blue-200 transition-all"
+              >
+                Get Started
+              </Link>
+            )}
           </div>
         </div>
       </div>
