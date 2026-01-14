@@ -29,7 +29,7 @@ const LoginPage = () => {
       toast.success("Login Successful!");
 
       const destination = searchParams.get("redirect") || "/";
-      // Redirect to protected route
+      // Redirect to protected route from login
       router.push(destination);
       router.refresh();
     } else {
