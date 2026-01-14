@@ -8,7 +8,11 @@ const proxy = (request) => {
 
   if (pathname.startsWith("/add-item")) {
     if (!isLoggedIn) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      //   return NextResponse.redirect(new URL("/login", request.url));
+
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(loginUrl);
     }
   }
 
