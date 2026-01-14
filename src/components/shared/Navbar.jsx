@@ -61,6 +61,12 @@ const Navbar = () => {
               Browse Items
             </Link>
             <Link
+              href="/add-item"
+              className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
+            >
+              Add Item
+            </Link>
+            <Link
               href="/about"
               className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
             >
@@ -133,6 +139,13 @@ const Navbar = () => {
             </Link>
             <Link
               href="/items"
+              onClick={closeMenu}
+              className="block px-3 py-2 text-gray-600 hover:bg-blue-50 rounded-md"
+            >
+              Browse Items
+            </Link>
+            <Link
+              href="/add-item"
               onClick={closeMenu}
               className="block px-3 py-2 text-gray-600 hover:bg-blue-50 rounded-md"
             >

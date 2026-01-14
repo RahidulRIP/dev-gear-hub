@@ -1,7 +1,8 @@
-"use client"; 
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -24,7 +25,7 @@ const LoginPage = () => {
       // Set Client-side Cookie
       document.cookie = "isLoggedIn=true; path=/; max-age=3600";
 
-      alert("Login Successful!");
+      toast.success("Login Successful!");
 
       // Redirect to protected route
       router.push("/");
