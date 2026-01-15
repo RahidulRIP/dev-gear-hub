@@ -15,7 +15,7 @@ const fetchItemDetails = async (id) => {
 
 const ItemDetails = async ({ params }) => {
   const { id } = await params;
-  console.log(id);
+
   const item = await fetchItemDetails(id);
 
   if (!item) {

@@ -7,6 +7,7 @@ import Stats from "@/components/Home/Stats";
 import Testimonials from "@/components/Home/Testimonials";
 
 const Home = () => {
+    
   return (
     <div>
       <Hero/>

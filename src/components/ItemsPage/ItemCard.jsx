@@ -5,7 +5,6 @@ import Link from "next/link";
 const ItemCard = ({ item }) => {
   return (
     <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 group">
-      {/* প্রোডাক্ট ইমেজ */}
       <div className="h-52 overflow-hidden bg-gray-100">
         <Image
           src={item.image}
@@ -16,7 +15,6 @@ const ItemCard = ({ item }) => {
         />
       </div>
 
-      {/* প্রোডাক্ট ইনফরমেশন */}
       <div className="p-5">
         <div className="mb-1">
           <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">
@@ -33,7 +31,7 @@ const ItemCard = ({ item }) => {
           </span>
 
           <Link
-            href={`/items/${item.id}`}
+            href={`/items/${item._id}`}
             className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors"
           >
             Details

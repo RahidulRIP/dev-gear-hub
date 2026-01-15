@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -28,13 +30,20 @@ const LoginPage = () => {
       toast.success("Login Successful!");
 
       // Redirect to protected route
-      router.push("/");
+      router.push("/items");
       router.refresh();
     } else {
       setError(
         "Invalid email or password! (Hint: admin@devgear.com / admin123)"
       );
     }
+  };
+
+  // --- নতুন গুগল লগইন ফাংশন ---
+  const handleGoogleLogin = async () => {
+    // এটি গুগল লগইন শুরু করবে এবং সাকসেস হলে /items এ নিয়ে যাবে
+    await signIn("google", { callbackUrl: "/items" });
+    // গুগল থেকে ফেরার পর মিডলওয়্যার চেক করার জন্য কুকি অলরেডি সেট হয়ে যাবে (ধাপ ১ অনুযায়ী)
   };
 
   return (
@@ -86,6 +95,27 @@ const LoginPage = () => {
             Sign In
           </button>
         </form>
+
+        <div className="relative flex items-center my-6">
+          <div className="grow border-t border-gray-300"></div>
+          <span className="mx-4 text-gray-500">OR</span>
+          <div className="grow border-t border-gray-300"></div>
+        </div>
+
+        {/* গুগল বাটন */}
+        <button
+          onClick={handleGoogleLogin}
+          className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 py-3 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 transition"
+        >
+          <Image
+            src="https://authjs.dev/img/providers/google.svg"
+            alt="Google"
+            className="w-5 h-5"
+            width={400}
+            height={400}
+          />
+          Continue with Google
+        </button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,6 +10,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathName = usePathname();
+  const { data: session, status } = useSession();
+
+  console.log(session?.user);
 
   // ১. শুধুমাত্র লগইন স্ট্যাটাস চেক করার জন্য ইফেক্ট
   useEffect(() => {
@@ -24,12 +28,17 @@ const Navbar = () => {
   // ২. যখনই কোনো লিঙ্কে ক্লিক করা হবে, তখনই মেনু বন্ধ করার জন্য একটি ফাংশন
   const closeMenu = () => setIsOpen(false);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     document.cookie = "isLoggedIn=; path=/; max-age=0";
     setIsLoggedIn(false);
     closeMenu();
     router.push("/");
     router.refresh();
+
+    await signOut({
+      callbackUrl: "/",
+      redirect: true,
+    });
   };
 
   return (
@@ -40,7 +49,7 @@ const Navbar = () => {
             <Link
               href="/"
               onClick={closeMenu}
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+              className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
             >
               DevGear Hub
             </Link>
@@ -75,20 +84,28 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            {isLoggedIn ? (
-              <button
-                onClick={handleLogout}
-                className="px-5 py-2 text-sm font-semibold text-white bg-red-600 rounded-full"
-              >
-                Logout
-              </button>
+            {status !== "loading" ? (
+              <>
+                {session || isLoggedIn ? (
+                  <button
+                    onClick={handleLogout}
+                    className="px-5 py-2 text-sm font-semibold text-white bg-red-600 rounded-full hover:bg-red-700 transition"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="px-5 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition"
+                  >
+                    Get Started
+                  </Link>
+                )}
+              </>
             ) : (
-              <Link
-                href="/login"
-                className="px-5 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full"
-              >
-                Get Started
-              </Link>
+              <>
+                <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+              </>
             )}
           </div>
 
