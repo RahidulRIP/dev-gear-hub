@@ -38,6 +38,7 @@ const LoginPage = () => {
 
   const handleGoogleLogin = async () => {
     await signIn("google", { callbackUrl: "/items" });
+    toast.success("Login Successful!");
   };
 
   return (
